@@ -2,6 +2,7 @@
 	import { Heading, P, Button, A, Checkbox, Dropdown, Chevron, Radio } from 'flowbite-svelte';
 	import { Dropzone } from 'flowbite-svelte';
 	import { Spinner } from 'flowbite-svelte';
+	import { colorOptions } from '$utils/color-options.js';
 
 	import {
 		getImageData,
@@ -108,48 +109,17 @@
 					</span>
 				</h3>
 				<div class="flex gap-4">
-					<Button color="alternative"><Chevron>Color</Chevron></Button>
+					<Button color="alternative"><Chevron>{colorOptions[colorRadio].name}</Chevron></Button>
 					<Dropdown class="w-60 p-3 space-y-1">
-						<li>
-							<Radio
-								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-								name="color"
-								bind:group={colorRadio}
-								value={'transparentOrWhite'}>Transparent or White</Radio
-							>
-						</li>
-						<li>
-							<Radio
-								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-								name="color"
-								bind:group={colorRadio}
-								value={'automatic'}>Automatic</Radio
-							>
-						</li>
-						<li>
-							<Radio
-								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-								name="color"
-								bind:group={colorRadio}
-								value={'transparent'}>Transparent</Radio
-							>
-						</li>
-						<li>
-							<Radio
-								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-								name="color"
-								bind:group={colorRadio}
-								value={'white'}>White</Radio
-							>
-						</li>
-						<li>
-							<Radio
-								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-								name="color"
-								bind:group={colorRadio}
-								value={'black'}>Black</Radio
-							>
-						</li>
+						{#each Object.keys(colorOptions) as colorKey}
+							<li>
+								<Radio
+									class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+									bind:group={colorRadio}
+									value={colorKey}>{colorOptions[colorKey].name}</Radio
+								>
+							</li>
+						{/each}
 					</Dropdown>
 					<Checkbox
 						on:click={() => {
