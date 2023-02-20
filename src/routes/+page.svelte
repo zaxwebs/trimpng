@@ -2,16 +2,15 @@
 	import { Heading, P, Button, A, Checkbox, Dropdown, Chevron, Radio } from 'flowbite-svelte';
 	import { Dropzone } from 'flowbite-svelte';
 	import { Spinner } from 'flowbite-svelte';
-	import { Badge } from 'flowbite-svelte';
 
 	import {
 		getImageData,
 		getCroppedImageData,
 		getCroppedDataUrl,
-		detectBoundaryColor
+		getBoundaryColor
 	} from '$utils/image-processing.js';
 
-	let colorRadio = 0;
+	let colorRadio = 'transparentOrWhite';
 	let files = [];
 	let processedFilesCount = 0;
 	let guidelinesEnabled = false;
@@ -22,7 +21,7 @@
 
 		[...newFiles].forEach((file, index) => {
 			getImageData(file).then((imageData) => {
-				const boundaryColor = detectBoundaryColor(imageData);
+				const boundaryColor = getBoundaryColor(imageData, colorRadio);
 				const croppedImageData = getCroppedImageData(imageData, boundaryColor);
 				const croppedDataUrl = getCroppedDataUrl(croppedImageData);
 				file.dataURL = croppedDataUrl;
@@ -31,10 +30,6 @@
 				processedFilesCount += 1;
 			});
 		});
-	};
-
-	const handleDrop = (e) => {
-		console.log('Drop');
 	};
 </script>
 

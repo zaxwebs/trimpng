@@ -1,6 +1,36 @@
 export const detectBoundaryColor = (imageData) => {
 	const { data } = imageData;
-	return { r: data[0], g: data[1], b: data[2], a: data[3] };
+	return [data[0], data[1], data[2], data[3]];
+};
+
+export const colorMap = {
+	transparent: [0, 0, 0, 0],
+	white: [255, 255, 255, 255],
+	black: [0, 0, 0, 255]
+};
+
+export const getBoundaryColor = (imageData, colorIndex) => {
+	console.log(colorIndex)
+	switch (colorIndex) {
+		case 'transparentOrWhite':
+			const detectedBoundaryColor = detectBoundaryColor(imageData);
+			if (
+				detectedBoundaryColor.join() == colorMap.transparent.join() ||
+				detectedBoundaryColor.join() == colorMap.transparent.join()
+			) {
+				return detectedBoundaryColor;
+			} else {
+				return false;
+			}
+		case 'automatic':
+			return detectBoundaryColor(imageData);
+		case 'transparent':
+			return [0, 0, 0, 0];
+		case 'white':
+			return [255, 255, 255, 255];
+		case 'black':
+			return [0, 0, 0, 255];
+	}
 };
 
 export const getImageData = (file) => {
@@ -32,7 +62,9 @@ export const getImageData = (file) => {
 	});
 };
 
-export const getCroppedImageData = (imageData, boundaryColor) => {
+export const getCroppedImageData = (imageData, boundaryColor = false) => {
+	// Return imageData if no boundaryColor
+	if (!boundaryColor) return imageData;
 	// Calculate the bounds of the non-boundary pixels
 	let minX = imageData.width;
 	let minY = imageData.height;
@@ -44,10 +76,10 @@ export const getCroppedImageData = (imageData, boundaryColor) => {
 			const i = (y * imageData.width + x) * 4; // Index of current pixel in the data array
 
 			// Check if the current pixel's color matches the boundary color
-			if (imageData.data[i] === boundaryColor.r &&
-				imageData.data[i + 1] === boundaryColor.g &&
-				imageData.data[i + 2] === boundaryColor.b &&
-				imageData.data[i + 3] === boundaryColor.a) {
+			if (imageData.data[i] === boundaryColor[0] &&
+				imageData.data[i + 1] === boundaryColor[1] &&
+				imageData.data[i + 2] === boundaryColor[2] &&
+				imageData.data[i + 3] === boundaryColor[3]) {
 				continue; // Skip boundary pixels
 			}
 
