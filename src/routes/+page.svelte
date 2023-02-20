@@ -23,7 +23,6 @@
 		[...newFiles].forEach((file, index) => {
 			getImageData(file).then((imageData) => {
 				const boundaryColor = getBoundaryColor(imageData, colorRadio);
-				console.log(boundaryColor);
 				const croppedImageData = getCroppedImageData(imageData, boundaryColor);
 				const croppedDataUrl = getCroppedDataUrl(croppedImageData);
 				file.dataURL = croppedDataUrl;
@@ -74,7 +73,10 @@
 				class="mb-4"
 				multiple
 				id="dropzone"
-				on:change={(e) => handleFileInput(e.target.files)}
+				on:change={(e) => {
+					handleFileInput(e.target.files);
+					e.target.value = '';
+				}}
 				accept=".png, .jpg, .jpeg"
 			>
 				<svg

@@ -10,7 +10,6 @@ export const colorMap = {
 };
 
 export const getBoundaryColor = (imageData, colorIndex) => {
-	console.log(colorIndex)
 	switch (colorIndex) {
 		case 'transparentOrWhite':
 			const detectedBoundaryColor = detectBoundaryColor(imageData);
