@@ -1,5 +1,5 @@
 <script>
-	import { Heading, P, Button, A, Checkbox } from 'flowbite-svelte';
+	import { Heading, P, Button, A, Checkbox, Dropdown, Chevron, Radio } from 'flowbite-svelte';
 	import { Dropzone } from 'flowbite-svelte';
 	import { Spinner } from 'flowbite-svelte';
 	import { Badge } from 'flowbite-svelte';
@@ -11,11 +11,10 @@
 		detectBoundaryColor
 	} from '$utils/image-processing.js';
 
+	let colorRadio = 0;
 	let files = [];
+	let processedFilesCount = 0;
 	let guidelinesEnabled = false;
-
-	$: {
-	}
 
 	const handleFileInput = (newFiles) => {
 		const length = files.length;
@@ -29,6 +28,7 @@
 				file.dataURL = croppedDataUrl;
 				files[length + index] = file;
 				files = [...files];
+				processedFilesCount += 1;
 			});
 		});
 	};
@@ -45,8 +45,8 @@
 				Instantly Trim Image Whitespace
 			</Heading>
 			<P class="text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-				Remove white, black or transparent space around images. Processes images right in your
-				browser. Supports PNGs & JPGs. No size limits. Absolutely free to use, forever.
+				Remove transparent, white, black or any colored space around images. Processes images right
+				in your browser. Supports PNGs & JPGs. No size limits. Absolutely free to use, forever.
 				<A class="font-medium hover:underline" href="/about">
 					Learn more
 					<svg
@@ -102,18 +102,67 @@
 		</div>
 
 		{#if files.length}
-			<div class="flex space-between mb-4">
-				<Heading class=" flex items-center" tag="h3">
+			<div class="flex justify-between mb-4">
+				<h3 class="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
 					Preview
-					<Badge class="text-2xl font-semibold ml-2">{files.length}</Badge>
-				</Heading>
-				<Checkbox
-					on:click={() => {
-						guidelinesEnabled = !guidelinesEnabled;
-					}}
-				>
-					Guidelines
-				</Checkbox>
+					<span
+						class="font-medium inline-flex items-center justify-center px-2.5 py-0.5 text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 rounded text-2xl font-semibold ml-2"
+					>
+						{processedFilesCount}/{files.length}
+					</span>
+				</h3>
+				<div class="flex gap-4">
+					<Button color="alternative"><Chevron>Color</Chevron></Button>
+					<Dropdown class="w-60 p-3 space-y-1">
+						<li>
+							<Radio
+								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+								name="color"
+								bind:group={colorRadio}
+								value={'transparentOrWhite'}>Transparent or White</Radio
+							>
+						</li>
+						<li>
+							<Radio
+								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+								name="color"
+								bind:group={colorRadio}
+								value={'automatic'}>Automatic</Radio
+							>
+						</li>
+						<li>
+							<Radio
+								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+								name="color"
+								bind:group={colorRadio}
+								value={'transparent'}>Transparent</Radio
+							>
+						</li>
+						<li>
+							<Radio
+								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+								name="color"
+								bind:group={colorRadio}
+								value={'white'}>White</Radio
+							>
+						</li>
+						<li>
+							<Radio
+								class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+								name="color"
+								bind:group={colorRadio}
+								value={'black'}>Black</Radio
+							>
+						</li>
+					</Dropdown>
+					<Checkbox
+						on:click={() => {
+							guidelinesEnabled = !guidelinesEnabled;
+						}}
+					>
+						Guidelines
+					</Checkbox>
+				</div>
 			</div>
 
 			<div class="grid grid-cols-8 gap-8 mb-8">
