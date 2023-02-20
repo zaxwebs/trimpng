@@ -22,6 +22,7 @@
 		[...newFiles].forEach((file, index) => {
 			getImageData(file).then((imageData) => {
 				const boundaryColor = getBoundaryColor(imageData, colorRadio);
+				console.log(boundaryColor);
 				const croppedImageData = getCroppedImageData(imageData, boundaryColor);
 				const croppedDataUrl = getCroppedDataUrl(croppedImageData);
 				file.dataURL = croppedDataUrl;

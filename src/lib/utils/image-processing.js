@@ -15,8 +15,7 @@ export const getBoundaryColor = (imageData, colorIndex) => {
 		case 'transparentOrWhite':
 			const detectedBoundaryColor = detectBoundaryColor(imageData);
 			if (
-				detectedBoundaryColor.join() == colorMap.transparent.join() ||
-				detectedBoundaryColor.join() == colorMap.transparent.join()
+				[colorMap.transparent.join(), colorMap.white.join()].includes(detectedBoundaryColor.join())
 			) {
 				return detectedBoundaryColor;
 			} else {
