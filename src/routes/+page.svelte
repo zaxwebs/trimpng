@@ -1,5 +1,15 @@
 <script>
-	import { Heading, P, Button, A, Checkbox, Dropdown, Chevron, Radio } from 'flowbite-svelte';
+	import {
+		Heading,
+		P,
+		Button,
+		A,
+		Checkbox,
+		Dropdown,
+		Chevron,
+		Radio,
+		Toggle
+	} from 'flowbite-svelte';
 	import { Dropzone } from 'flowbite-svelte';
 	import { Spinner } from 'flowbite-svelte';
 	import { colorOptions } from '$utils/color-options.js';
@@ -15,21 +25,22 @@
 	let files = [];
 	let processedFilesCount = 0;
 	let guidelinesEnabled = false;
+	let comparisonLogos = ['google', 'samsung', 'adobe', 'disney', 'facebook', 'netflix'];
+	let isTrimmed = true;
 
-	const handleFileInput = (newFiles) => {
+	const handleFileInput = async (newFiles) => {
 		const length = files.length;
 		files = [...files, ...newFiles];
 
-		[...newFiles].forEach((file, index) => {
-			getImageData(file).then((imageData) => {
-				const boundaryColor = getBoundaryColor(imageData, colorRadio);
-				const croppedImageData = getCroppedImageData(imageData, boundaryColor);
-				const croppedDataUrl = getCroppedDataUrl(croppedImageData);
-				file.dataURL = croppedDataUrl;
-				files[length + index] = file;
-				files = [...files];
-				processedFilesCount += 1;
-			});
+		[...newFiles].map(async (file, index) => {
+			const imageData = await getImageData(file);
+			const boundaryColor = getBoundaryColor(imageData, colorRadio);
+			const croppedImageData = getCroppedImageData(imageData, boundaryColor);
+			const croppedDataUrl = getCroppedDataUrl(croppedImageData);
+			file.dataURL = croppedDataUrl;
+			files[length + index] = file;
+			files = [...files];
+			processedFilesCount += 1;
 		});
 	};
 </script>
@@ -154,6 +165,30 @@
 				{/each}
 			</div>
 			<Button pill={true} size="xl">Download Images</Button>
+		{:else}
+			<div class="flex flex-col items-center">
+				<Toggle
+					on:change={() => {
+						isTrimmed = !isTrimmed;
+					}}
+					class="mb-4"
+					checked={isTrimmed}>TrimPNG</Toggle
+				>
+				{#if isTrimmed}
+					<P class="mb-8">No whitespace around images.</P>
+				{:else}
+					<P class="mb-8">Uneven whitespace around images.</P>
+				{/if}
+				<div class="inline-flex justify-between gap-12">
+					{#each comparisonLogos as logo}
+						<img
+							class={isTrimmed ? 'self-center' : 'self-start border'}
+							src="images/comparison-logos/{logo}{isTrimmed ? '-trimmed' : ''}.png"
+							alt="logo"
+						/>
+					{/each}
+				</div>
+			</div>
 		{/if}
 	</div>
 </div>

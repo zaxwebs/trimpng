@@ -22,9 +22,9 @@
 		<div class="mb-8">
 			<Heading tag="h3">The story behind TrimPNG</Heading>
 			<P>
-				I was once working on a project where I had to remove whitespace from 400 images, back then
-				I wrote a little Python script to help me with the task. I quickly did a search for a web
-				app and most of them were super slow or had limits, so I took it upon myself to build a
+				I was once working on a project where I had to remove whitespace from 400 logos, back then I
+				wrote a little Python script to help me with the task. I quickly did a search for a web app
+				and most of them were super slow or had limits, so I took it upon myself to build a
 				whitespace trimmer with in-browser processing.
 			</P>
 			<P>

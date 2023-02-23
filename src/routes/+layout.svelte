@@ -35,7 +35,7 @@
 	</main>
 	<div class="bg-white dark:bg-gray-900 dark:text-gray-200">
 		<Footer class="rounded-none">
-			<FooterCopyright href="/" by="TrimPNG" />
+			<FooterCopyright href="/" by="TrimPNG v0.2.0" />
 			<FooterLinkGroup
 				ulClass="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0"
 			>
