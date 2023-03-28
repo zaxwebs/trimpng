@@ -24,7 +24,7 @@
 	let colorRadio = 'transparentOrWhite';
 	let files = [];
 	let processedFilesCount = 0;
-	let guidelinesEnabled = false;
+	let bordersEnabled = false;
 	let comparisonLogos = ['google', 'samsung', 'adobe', 'disney', 'facebook', 'netflix'];
 	let isTrimmed = true;
 
@@ -76,6 +76,20 @@
 
 <div class="px-2 sm:px-4 py-2.5 w-full">
 	<div class="mx-auto container">
+		<div class="mb-4">
+			<Button color="alternative"><Chevron>{colorOptions[colorRadio].name}</Chevron></Button>
+			<Dropdown class="w-60 p-3 space-y-1">
+				{#each Object.keys(colorOptions) as colorKey}
+					<li>
+						<Radio
+							class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+							bind:group={colorRadio}
+							value={colorKey}>{colorOptions[colorKey].name}</Radio
+						>
+					</li>
+				{/each}
+			</Dropdown>
+		</div>
 		<div
 			on:drop|preventDefault={(e) => handleFileInput(e.dataTransfer.files)}
 			on:dragover|preventDefault={(e) => {}}
@@ -122,24 +136,12 @@
 					</span>
 				</h3>
 				<div class="flex gap-4">
-					<Button color="alternative"><Chevron>{colorOptions[colorRadio].name}</Chevron></Button>
-					<Dropdown class="w-60 p-3 space-y-1">
-						{#each Object.keys(colorOptions) as colorKey}
-							<li>
-								<Radio
-									class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-									bind:group={colorRadio}
-									value={colorKey}>{colorOptions[colorKey].name}</Radio
-								>
-							</li>
-						{/each}
-					</Dropdown>
 					<Checkbox
 						on:click={() => {
-							guidelinesEnabled = !guidelinesEnabled;
+							bordersEnabled = !bordersEnabled;
 						}}
 					>
-						Guidelines
+						Preview Borders
 					</Checkbox>
 				</div>
 			</div>
@@ -151,8 +153,8 @@
 							{#if file.dataURL}
 								<img
 									class="object-scale-down max-h-full border"
-									class:border-transparent={!guidelinesEnabled}
-									class:border-gray-300={guidelinesEnabled}
+									class:border-transparent={!bordersEnabled}
+									class:border-gray-300={bordersEnabled}
 									src={file.dataURL}
 									alt={file.name}
 								/>
@@ -166,27 +168,37 @@
 			</div>
 			<Button pill={true} size="xl">Download Images</Button>
 		{:else}
-			<div class="flex flex-col items-center">
-				<Toggle
-					on:change={() => {
-						isTrimmed = !isTrimmed;
-					}}
-					class="mb-4"
-					checked={isTrimmed}>TrimPNG</Toggle
-				>
-				{#if isTrimmed}
-					<P class="mb-8">No whitespace around images.</P>
-				{:else}
-					<P class="mb-8">Uneven whitespace around images.</P>
-				{/if}
-				<div class="inline-flex justify-between gap-12">
-					{#each comparisonLogos as logo}
-						<img
-							class={isTrimmed ? 'self-center' : 'self-start border'}
-							src="images/comparison-logos/{logo}{isTrimmed ? '-trimmed' : ''}.png"
-							alt="logo"
-						/>
-					{/each}
+			<div class="mx-auto max-w-4xl">
+				<div class="flex flex-col items-center">
+					<Toggle
+						on:change={() => {
+							isTrimmed = !isTrimmed;
+						}}
+						class="mb-4"
+						checked={isTrimmed}>TrimPNG</Toggle
+					>
+					<P class="mb-8 text-slate-500">
+						{#if isTrimmed}
+							No whitespace around images.
+						{:else}
+							Uneven whitespace around images.
+						{/if}
+					</P>
+					<div class="flex justify-between gap-12">
+						{#each comparisonLogos as logo}
+							<div
+								class:self-center={isTrimmed}
+								class:self-start={!isTrimmed}
+								class:border={!isTrimmed}
+							>
+								<img
+									class="w-full"
+									src="images/comparison-logos/{logo}{isTrimmed ? '-trimmed' : ''}.png"
+									alt="logo"
+								/>
+							</div>
+						{/each}
+					</div>
 				</div>
 			</div>
 		{/if}
