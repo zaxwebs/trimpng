@@ -52,8 +52,8 @@
 				Instantly Trim Image Whitespace
 			</Heading>
 			<P class="text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-				Remove transparent, white, black or any colored space around images. Processes images right
-				in your browser. Supports PNGs & JPGs. No size limits. Absolutely free to use, forever.
+				Remove any transparent or colored whitespace surrounding images. Processes images right in
+				your browser. Supports PNGs & JPGs. No size limits. Absolutely free to use, forever.
 				<A class="font-medium hover:underline" href="/about">
 					Learn more
 					<svg
@@ -77,7 +77,21 @@
 <div class="px-2 sm:px-4 py-2.5 w-full">
 	<div class="mx-auto container">
 		<div class="mb-4">
-			<Button color="alternative"><Chevron>{colorOptions[colorRadio].name}</Chevron></Button>
+			<Button color="alternative"
+				><Chevron>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 96 960 960"
+						class="mr-3 w-5 h-5"
+						stroke="currentColor"
+					>
+						<path
+							d="M414 758q-14 0-28.146-6-14.147-6-25.854-17L182 557q-11-11.895-17-26.268-6-14.372-6-30.232t6-30.728q6-14.868 17-25.772l189-189-95-95q-8-8.5-8-21.25t9-22.141Q286 108 298.5 108t21.5 9l326 327q12 10.904 17.5 25.772Q669 484.64 669 500.5q0 15.86-5.5 30.232Q658 545.105 646 557L468 735q-10.732 11-25.366 17T414 758Zm0-460L215 497h398L414 298Zm337.788 477Q722 775 701 753.85 680 732.7 680 703q0-17.348 8-37.174T710 625q8-13 19.5-28t22.5-28q11 13 22.5 28t19.5 28q14 21 22 40.826T824 703q0 29.7-21.212 50.85-21.213 21.15-51 21.15ZM141 1057q-25.162 0-43.081-17.89Q80 1021.23 80 996.115T97.919 953.5Q115.838 936 141 936h679q24.75 0 42.375 17.677t17.625 42.5Q880 1021 862.375 1039T820 1057H141Z"
+						/>
+					</svg>
+					{colorOptions[colorRadio].name}
+				</Chevron></Button
+			>
 			<Dropdown class="w-60 p-3 space-y-1">
 				{#each Object.keys(colorOptions) as colorKey}
 					<li>
@@ -181,7 +195,7 @@
 						{#if isTrimmed}
 							No whitespace around images.
 						{:else}
-							Uneven whitespace around images.
+							Whitespace around images.
 						{/if}
 					</P>
 					<div class="flex justify-between gap-12">
