@@ -12,6 +12,9 @@
 	import { page } from '$app/stores';
 </script>
 
+<svelte:head>
+	<title>TrimPNG</title>
+</svelte:head>
 <body class="min-h-screen flex flex-col">
 	<Navbar let:hidden let:toggle>
 		<NavBrand href="/">

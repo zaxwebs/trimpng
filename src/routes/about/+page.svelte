@@ -14,8 +14,8 @@
 			<P>
 				TrimPNG is a browser-based app to remove transparent, white, black or any other colored
 				whitespace from around images. It has smart boundary & color detection plus auto-cropping.
-				And the best part is that all processing happens in the browser. And to top it off, TrimPNG
-				is free to use, there's no subscriptions or limits.
+				All processing happens in the browser. And to top it off, TrimPNG is free to use, there's no
+				subscriptions or limits.
 			</P>
 		</div>
 		<div class="mb-8">
@@ -25,7 +25,7 @@
 				no gates here. If you need to trim an image or two, by all means, you are welcome to do so.
 			</P>
 		</div>
-		<div>
+		<div class="mb-8">
 			<Heading tag="h3">Support development</Heading>
 			<P>
 				You might be wondering why and how is this free? Well, luckily, TrimPNG does not have high
@@ -33,6 +33,12 @@
 				would be appreciated. If you feel like it, you can <A
 					href="https://www.buymeacoffee.com/zaxwebs">send some this way</A
 				>.
+			</P>
+		</div>
+		<div>
+			<Heading tag="h3">Contact</Heading>
+			<P>
+				You can reach me here: <A href="https://instagram.com/zaxwebs">instagram.com/zaxwebs</A>.
 			</P>
 		</div>
 	</div>
