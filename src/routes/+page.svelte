@@ -181,7 +181,7 @@
 				</div>
 			</div>
 
-			<div class="grid grid-cols-8 gap-8 mb-8">
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-8 gap-8 mb-8">
 				{#each files as file}
 					<div>
 						<div class="flex items-center justify-center aspect-square mb-4">
