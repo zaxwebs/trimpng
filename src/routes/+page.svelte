@@ -1,4 +1,7 @@
 <script>
+	/*
+		I promise I'll clean this up in future.
+	*/
 	import {
 		Heading,
 		P,
