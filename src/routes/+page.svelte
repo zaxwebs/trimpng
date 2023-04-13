@@ -221,7 +221,7 @@
 							Whitespace around images.
 						{/if}
 					</P>
-					<div class="flex justify-between gap-12">
+					<div class="grid grid-cols-2 md:grid-cols-6 gap-12">
 						{#each comparisonLogos as logo}
 							<div
 								class:self-center={isTrimmed}
