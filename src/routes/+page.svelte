@@ -43,6 +43,26 @@
 			processedFilesCount += 1;
 		});
 	};
+
+	const downloadImages = () => {
+		const images = document.querySelectorAll('.img-trimmed');
+		images.forEach(async (img, index) => {
+			const src = img.src;
+
+			// Fetch the image as a blob.
+			const fetchResponse = await fetch(src);
+			const blob = await fetchResponse.blob();
+
+			// Figure out a name for it from the src and the mime-type.
+			const name = files[index].name;
+
+			// Download the blob using a <a> element.
+			const a = document.createElement('a');
+			a.setAttribute('href', URL.createObjectURL(blob));
+			a.setAttribute('download', name);
+			a.click();
+		});
+	};
 </script>
 
 <div class="px-2 sm:px-4 py-8 w-full">
@@ -166,7 +186,7 @@
 						<div class="flex items-center justify-center aspect-square mb-4">
 							{#if file.dataURL}
 								<img
-									class="object-scale-down max-h-full border"
+									class="object-scale-down max-h-full border img-trimmed"
 									class:border-transparent={!bordersEnabled}
 									class:border-gray-300={bordersEnabled}
 									src={file.dataURL}
@@ -180,7 +200,7 @@
 					</div>
 				{/each}
 			</div>
-			<Button pill={true} size="xl">Download Images</Button>
+			<Button pill={true} size="xl" on:click={downloadImages}>Download Images</Button>
 		{:else}
 			<div class="mx-auto max-w-4xl">
 				<div class="flex flex-col items-center">
