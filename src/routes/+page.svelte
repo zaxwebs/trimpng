@@ -11,6 +11,7 @@
 		Dropdown,
 		Chevron,
 		Radio,
+		Alert,
 		Toggle
 	} from 'flowbite-svelte';
 	import { Dropzone } from 'flowbite-svelte';
@@ -97,7 +98,7 @@
 
 <div class="px-2 sm:px-4 py-2.5 w-full">
 	<div class="mx-auto container">
-		<div class="mb-4">
+		<div class="mb-4 flex gap-4 flex-wrap">
 			<Button color="alternative"
 				><Chevron>
 					<svg
@@ -124,6 +125,7 @@
 					</li>
 				{/each}
 			</Dropdown>
+			<Alert>Images you upload next will be processed with this setting</Alert>
 		</div>
 		<div
 			on:drop|preventDefault={(e) => handleFileInput(e.dataTransfer.files)}
