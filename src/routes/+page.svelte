@@ -70,6 +70,20 @@
 <div class="px-2 sm:px-4 py-8 w-full">
 	<div class="mx-auto container">
 		<div class="text-center">
+			<Alert class="mb-8">
+				<p class="mt-2 mb-4 text-sm">
+					TrimPNG is shutting down on December 26 due to operational costs.
+				</p>
+				<div class="flex gap-2">
+					<Button href="https://www.buymeacoffee.com/zaxwebs" size="xs">Donate</Button>
+					<Button
+						href="https://www.zackwebster.com/"
+						size="xs"
+						outline
+						class="dark:!text-primary-800">Get in Touch</Button
+					>
+				</div>
+			</Alert>
 			<Heading tag="h1" class="mb-4" customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl">
 				Instantly Trim Image Whitespace
 			</Heading>
@@ -77,7 +91,7 @@
 				Remove any transparent or colored whitespace surrounding images. Processes images right in
 				your browser. Supports PNGs & JPGs. No size limits. Absolutely free to use, forever.
 				<A class="font-medium hover:underline" href="/about">
-					Learn more
+					See it in action
 					<svg
 						aria-hidden="true"
 						class="ml-1 w-5 h-5"
@@ -125,7 +139,7 @@
 					</li>
 				{/each}
 			</Dropdown>
-			<Alert>Images you upload next will be processed with this setting</Alert>
+			<Alert>Images you upload next will be processed with this setting.</Alert>
 		</div>
 		<div
 			on:drop|preventDefault={(e) => handleFileInput(e.dataTransfer.files)}

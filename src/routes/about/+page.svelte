@@ -1,5 +1,5 @@
 <script>
-	import { Heading, P, Button, A } from 'flowbite-svelte';
+	import { Heading, P, Button, A, Video } from 'flowbite-svelte';
 </script>
 
 <div class="px-2 sm:px-4 py-2.5 w-full">
@@ -11,6 +11,10 @@
 				padding around it. Wouldn't it be great if there was a web app that instantly removes that
 				extra space? That's exactly where TrimPNG comes in.
 			</P>
+			<div class="flex mb-4">
+				<Video src="videos/demo.mp4" controls trackSrc="flowbite.mp4" />
+			</div>
+
 			<P>
 				TrimPNG is a browser-based app to remove transparent, white, black or any other colored
 				whitespace from around images. It has smart boundary & color detection plus auto-cropping.
@@ -28,9 +32,7 @@
 		<div class="mb-8">
 			<Heading tag="h3">Support development</Heading>
 			<P>
-				You might be wondering why and how is this free? Well, luckily, TrimPNG does not have high
-				server costs as it does all the magic in your browser. But if you do want to help, a coffee
-				would be appreciated. If you feel like it, you can <A
+				If you do want to help, a coffee would be appreciated. If you feel like it, you can <A
 					href="https://www.buymeacoffee.com/zaxwebs">send some this way</A
 				>.
 			</P>
