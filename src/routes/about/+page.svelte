@@ -12,7 +12,7 @@
 				extra space? That's exactly where TrimPNG comes in.
 			</P>
 			<div class="flex mb-4">
-				<Video src="videos/demo.mp4" controls trackSrc="flowbite.mp4" />
+				<Video src="videos/demo.mp4" controls />
 			</div>
 
 			<P>
